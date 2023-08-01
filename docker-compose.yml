@@ -139,14 +139,19 @@ services:
       DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       PGOPTIONS: -c search_path=storage,public
       FILE_SIZE_LIMIT: 52428800
-      STORAGE_BACKEND: file
+      STORAGE_BACKEND: ${STORAGE_BACKEND} #file for local
       FILE_STORAGE_BACKEND_PATH: /var/lib/storage
-      TENANT_ID: stub
+      TENANT_ID: ${GLOBAL_S3_BUCKET}
       # TODO: https://github.com/supabase/storage-api/issues/55
       REGION: stub
-      GLOBAL_S3_BUCKET: stub
+      GLOBAL_S3_BUCKET: ${GLOBAL_S3_BUCKET}
+      GLOBAL_S3_ENDPOINT: ${GLOBAL_S3_ENDPOINT}
+      GLOBAL_S3_PROTOCOL: ${GLOBAL_S3_PROTOCOL}
+      GLOBAL_S3_FORCE_PATH_STYLE: ${GLOBAL_S3_FORCE_PATH_STYLE}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
-      - ./volumes/storage:/var/lib/storage
+      - /mnt/sdb:/var/lib/storage
 
   meta:
     #container_name: supabase-meta
@@ -209,4 +214,4 @@ services:
       - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/roles.sql
       # Must be superuser to enable pg_net extension
       - ./volumes/db/webhooks.sql:/etc/postgresql.schema.sql
-      - ./volumes/db/data:/var/lib/postgresql/data
+      - /mnt/sdc:/var/lib/postgresql/data
