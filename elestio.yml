@@ -56,6 +56,8 @@ environments:
     value: ""
   - key: "GLOBAL_S3_FORCE_PATH_STYLE"
     value: ""
+  - key: "IMGPROXY_ENABLE_WEBP_DETECTION"
+    value: "true"
   - key: "SITE_URL"
     value: "https://[CI_CD_DOMAIN]"
   - key: "ADDITIONAL_REDIRECT_URLS"
