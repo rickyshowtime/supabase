@@ -153,7 +153,7 @@ services:
       ENABLE_IMAGE_TRANSFORMATION: "true"
       IMGPROXY_URL: http://imgproxy:5001
     volumes:
-      - /mnt/sdb:/var/lib/storage
+      - /mnt/sdb:/var/lib/storage:z
 
   imgproxy:
     container_name: supabase-imgproxy
