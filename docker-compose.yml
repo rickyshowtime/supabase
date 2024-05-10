@@ -248,7 +248,7 @@ services:
       ENABLE_IMAGE_TRANSFORMATION: "true"
       IMGPROXY_URL: http://imgproxy:5001
     volumes:
-      - ./volumes/storage:/var/lib/storage:z
+      - /mnt/sdb:/var/lib/storage:z
 
   imgproxy:
     container_name: supabase-imgproxy
@@ -264,7 +264,7 @@ services:
       IMGPROXY_USE_ETAG: "true"
       IMGPROXY_ENABLE_WEBP_DETECTION: ${IMGPROXY_ENABLE_WEBP_DETECTION}
     volumes:
-      - ./volumes/storage:/var/lib/storage:z
+      - /mnt/sdb:/var/lib/storage:z
 
   meta:
     container_name: supabase-meta
