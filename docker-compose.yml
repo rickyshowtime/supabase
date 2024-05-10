@@ -24,9 +24,9 @@ services:
       timeout: 5s
       interval: 5s
       retries: 3
-    depends_on:
-      analytics:
-        condition: service_healthy
+#    depends_on:
+#      analytics:
+#        condition: service_healthy
     environment:
       STUDIO_PG_META_URL: http://meta:8080
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -58,9 +58,9 @@ services:
     ports:
       - 172.17.0.1:${KONG_HTTP_PORT}:8000/tcp
       # - ${KONG_HTTPS_PORT}:8443/tcp
-    depends_on:
-      analytics:
-        condition: service_healthy
+#    depends_on:
+#      analytics:
+#        condition: service_healthy
     environment:
       KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: /home/kong/kong.yml
@@ -84,8 +84,8 @@ services:
       db:
         # Disable this if you are using an external Postgres database
         condition: service_healthy
-      analytics:
-        condition: service_healthy
+#      analytics:
+#        condition: service_healthy
     healthcheck:
       test:
         [
@@ -155,8 +155,8 @@ services:
       db:
         # Disable this if you are using an external Postgres database
         condition: service_healthy
-      analytics:
-        condition: service_healthy
+#      analytics:
+#        condition: service_healthy
     restart: always
     environment:
       PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
@@ -176,8 +176,8 @@ services:
       db:
         # Disable this if you are using an external Postgres database
         condition: service_healthy
-      analytics:
-        condition: service_healthy
+#      analytics:
+#        condition: service_healthy
     healthcheck:
       test: ["CMD", "bash", "-c", "printf \\0 > /dev/tcp/localhost/4000"]
       timeout: 5s
@@ -272,8 +272,8 @@ services:
       db:
         # Disable this if you are using an external Postgres database
         condition: service_healthy
-      analytics:
-        condition: service_healthy
+#      analytics:
+#        condition: service_healthy
     restart: always
     environment:
       PG_META_PORT: 8080
@@ -289,9 +289,9 @@ services:
     restart: always
     env_file:
       - keys.env
-    depends_on:
-      analytics:
-        condition: service_healthy
+#    depends_on:
+#      analytics:
+#        condition: service_healthy
     environment:
       JWT_SECRET: ${JWT_SECRET}
       SUPABASE_URL: http://kong:8000
