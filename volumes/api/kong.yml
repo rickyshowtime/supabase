@@ -166,7 +166,7 @@ services:
       - name: key-auth
         config:
           hide_credentials: false
-      - name: aclQvU0rx3w-jxMD-8AeTBrow
+      - name: acl
         config:
           hide_groups_header: true
           allow:
