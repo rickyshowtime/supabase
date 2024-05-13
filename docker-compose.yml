@@ -64,10 +64,10 @@ services:
 #        condition: service_healthy
     environment:
       KONG_DATABASE: "off"
-      KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
+      KONG_DECLARATIVE_CONFIG: /home/kong/kong.yml
       # https://github.com/supabase/cli/issues/14
       KONG_DNS_ORDER: LAST,A,CNAME
-      KONG_PLUGINS: request-transformer,cors,key-auth,acl,basic-auth
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl
       KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
       KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
       # SUPABASE_ANON_KEY: ${ANON_KEY}
@@ -76,9 +76,9 @@ services:
       DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD}
     volumes:
       # https://github.com/supabase/supabase/issues/12661
-      # - ./volumes/api/kong.yml:/home/kong/temp.yml:ro
+      - ./volumes/api/kong.yml:/home/kong/temp.yml:ro
       # reverted because of https://github.com/supabase/supabase/issues/6423#issuecomment-1477133635 (kong folder permission issue)
-      - ./volumes/api:/var/lib/kong:ro
+      # - ./volumes/api:/var/lib/kong:ro
 
   auth:
     container_name: supabase-auth
